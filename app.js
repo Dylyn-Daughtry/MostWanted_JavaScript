@@ -39,10 +39,7 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  for(const el of listOfNames){
-    let displayOption = "Found " + el
-    alert(displayOption)
-  }
+  alert(listOfNames)
 
   for(const el of person ){
     let displayOption = promptFor("Found " + el.firstName + " " + el.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
@@ -104,7 +101,8 @@ function searchByEyeColor(people){
       return false;
     }
   })
-  listOfNames.push(foundPerson.firstName)
+  for(const person of foundPerson){
+    listOfNames.push(person.firstName)}
   return foundPerson
 }
 
