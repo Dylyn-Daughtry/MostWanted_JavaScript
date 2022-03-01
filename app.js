@@ -102,7 +102,7 @@ function searchByEyeColor(people){
     }
   })
   for(const person of foundPeople){
-    listOfNames.push(person.firstName)}
+    listOfNames.push(person.firstName + " "+ person.lastName)}
   return foundPeople
 }
 
