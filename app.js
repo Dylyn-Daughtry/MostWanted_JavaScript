@@ -7,6 +7,8 @@
 //#region 
 
 // app is the function called to start the entire application
+let listOfNames = []
+
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let searchResults;
@@ -15,7 +17,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      searchResults = searchByOccupation(people)
+      searchResults = searchByEyeColor(people)
       // TODO: search by traits
       break;
       default:
@@ -37,9 +39,14 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
+  for(const el of listOfNames){
+    let displayOption = "Found " + el
+    alert(displayOption)
+  }
+
   for(const el of person ){
-      let displayOption = promptFor("Found " + el.firstName + " " + el.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
-      return displayOption
+    let displayOption = promptFor("Found " + el.firstName + " " + el.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
+    return displayOption
   }
 
   switch(displayOption){
@@ -97,6 +104,7 @@ function searchByEyeColor(people){
       return false;
     }
   })
+  listOfNames.push(foundPerson.firstName)
   return foundPerson
 }
 
