@@ -7,7 +7,6 @@
 //#region 
 
 // app is the function called to start the entire application
-let listOfNames = []
 
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
@@ -39,7 +38,7 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  alert(listOfNames)
+  potentialMatches = displayPeople(person)
 
   for(const el of person ){
     let displayOption = promptFor("Found " + el.firstName + " " + el.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
@@ -101,8 +100,6 @@ function searchByEyeColor(people){
       return false;
     }
   })
-  for(const person of foundPeople){
-    listOfNames.push(person.firstName + " "+ person.lastName)}
   return foundPeople
 }
 
@@ -146,7 +143,7 @@ function searchByOccupation(people){
 
 // alerts a list of people
 function displayPeople(people){
-  alert(people.map(function(person){
+  alert("Potential Matches: " + ("\n") + people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
