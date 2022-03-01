@@ -37,7 +37,8 @@ function mainMenu(person, people){
   }
 
   for(const el of person ){
-      displayOption = promptFor("Found " + el.firstName + " " + el.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
+      let displayOption = promptFor("Found " + el.firstName + " " + el.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
+      return displayOption
   }
 
   switch(displayOption){
