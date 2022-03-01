@@ -74,7 +74,7 @@ function searchByName(people){
   let lastName = promptFor("What is the person's last name?", autoValid);
 
   let foundPerson = people.filter(function(potentialMatch){
-    if(potentialMatch.firstName.toLowerCase() === firstName.toLowerCase() && potentialMatch.lastName.toLowerCase() === lastName.toLowerCase()){
+    if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
       return true;
     }
     else{
