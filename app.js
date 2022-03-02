@@ -7,6 +7,7 @@
 //#region 
 
 // app is the function called to start the entire application
+let listOfNames = []
 
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
@@ -38,7 +39,7 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  potentialMatches = displayPeople(person)
+  alert(listOfNames)
 
   for(const el of person ){
     let displayOption = promptFor("Found " + el.firstName + " " + el.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
@@ -100,6 +101,8 @@ function searchByEyeColor(people){
       return false;
     }
   })
+  for(const person of foundPeople){
+    listOfNames.push(person.firstName)}
   return foundPeople
 }
 
@@ -143,7 +146,7 @@ function searchByOccupation(people){
 
 // alerts a list of people
 function displayPeople(people){
-  alert("Potential Matches: " + ("\n") + people.map(function(person){
+  alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
@@ -153,6 +156,12 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "Gender:" + person.gender + "\n";
+  personInfo += "Eye Color:" + person.eyeColor + "\n";
+  personInfo += "Height:" + person.height + "\n";
+  personInfo += "Weight:" + person.weight + "\n";
+  // personInfo += "Age" + person. + "\n";
+  personInfo += "Occupation" + person.occupation + "\n";
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
