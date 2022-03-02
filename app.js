@@ -50,8 +50,9 @@ function mainMenu(person, people){
     case "info":
     // TODO: get person's info
       for(const el of person){
-        displayPerson(el)}
+        displayPerson(el)};
     break;
+
     case "family":
     // TODO: get person's family
     break;
@@ -65,6 +66,30 @@ function mainMenu(person, people){
     return; // stop execution
     default:
     return mainMenu(person, people); // ask again
+  }
+
+
+if(displayOption === "info"){
+  displayOption = promptFor("Do you want to know their 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
+
+  switch(displayOption){
+    case "family":
+    // TODO: get person's family
+      for(const el of person){
+        displayPerson(el)};
+    break;
+    case "descendants":
+    // TODO: get person's descendants
+    break;
+    case "restart":
+    app(people); // restart
+    break;
+    case "quit":
+    return; // stop execution
+    default:
+    return mainMenu(person, people); // ask again
+  }
+
   }
 }
 
@@ -156,12 +181,12 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  personInfo += "Gender:" + person.gender + "\n";
-  personInfo += "Eye Color:" + person.eyeColor + "\n";
-  personInfo += "Height:" + person.height + "\n";
-  personInfo += "Weight:" + person.weight + "\n";
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
   // personInfo += "Age" + person. + "\n";
-  personInfo += "Occupation" + person.occupation + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
