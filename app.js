@@ -38,8 +38,8 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
-
-  alert(listOfNames)
+  let potentialMatches = displayPeople(person)
+  alert(potentialMatches)
 
   for(const el of person ){
     let displayOption = promptFor("Found " + el.firstName + " " + el.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
@@ -146,7 +146,7 @@ function searchByOccupation(people){
 
 // alerts a list of people
 function displayPeople(people){
-  alert(people.map(function(person){
+  alert("Potential Matches: " + ("\n") + people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
