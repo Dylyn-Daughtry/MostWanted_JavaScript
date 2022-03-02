@@ -19,8 +19,8 @@ function app(people){
       searchResults = searchByEyeColor(people)
       // TODO: search by traits
       break;
-      default:
-    app(people); // restart app
+    default:
+      app(people); // restart app
       break;
   }
   
@@ -74,6 +74,7 @@ function mainMenu(person, people){
 
         case "family":
         // TODO: get person's family
+          displayPeople(immediateFamily(person, people))
         break;
         case "descendants":
         // TODO: get person's descendants
@@ -100,6 +101,7 @@ function mainMenu(person, people){
       
           case "family":
           // TODO: get person's family
+            displayPeople(immediateFamily(person, people))
           break;
 
           case "descendants":
@@ -189,6 +191,52 @@ function searchByOccupation(people){
 
 
 //TODO: add other trait filter functions here.
+function immediateFamily(subject, people){
+  let foundFamily = people.filter(function(person){
+    //spouse
+    if(person.currentSpouse === subject.id){
+      return true;
+    }
+    //parents
+    else if(subject.parents.includes(person.id)){
+      return true;
+    }
+    //children
+    else if(person.parents.includes(subject.id)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  });
+  //siblings
+  foundFamily = foundFamily.concat(findSiblings(subject, people));
+  return foundFamily;
+}
+
+function findSiblings(subject,people){
+  if(subject.parents.length === 0){
+    return [];
+  }
+  else{
+    let foundSiblings = []
+    for(let i = 0; i < subject.parents.length; i++){
+      foundSiblings = foundSiblings.concat(
+        people.filter(function(person){
+          if(person.parents.includes(subject.parents[i]) && !foundSiblings.includes(person) && person.id !== subject.id){
+            return true;
+          }
+          else{
+            return false;
+          }
+
+        })
+
+      )
+    }
+    return foundSiblings;
+  }
+}
 
 
 
