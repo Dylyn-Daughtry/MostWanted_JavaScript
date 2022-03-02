@@ -7,7 +7,6 @@
 //#region 
 
 // app is the function called to start the entire application
-let listOfNames = []
 
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
@@ -79,7 +78,7 @@ function searchByName(people){
   let lastName = promptFor("What is the person's last name?", autoValid);
 
   let foundPerson = people.filter(function(potentialMatch){
-    if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
+    if(potentialMatch.firstName.toLowerCase() === firstName && potentialMatch.lastName.toLowerCase() === lastName){
       return true;
     }
     else{
@@ -101,8 +100,6 @@ function searchByEyeColor(people){
       return false;
     }
   })
-  for(const person of foundPerson){
-    listOfNames.push(person.firstName + " " + person.lastName)}
   return foundPerson
 }
 
