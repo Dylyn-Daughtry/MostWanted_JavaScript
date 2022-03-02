@@ -258,7 +258,7 @@ function displayPerson(person){
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Height: " + person.height + "\n";
   personInfo += "Weight: " + person.weight + "\n";
-  // personInfo += "Age" + person. + "\n";
+  personInfo += "Age" + ageCalculator(person) + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
@@ -307,5 +307,11 @@ function autoValid(input){
 function customValidation(input){
   
 }
-
+function ageCalculator(person){
+  let birthdate = new Date(person.dob);
+  let current = new Date();
+  let diff = current-birthdate; 
+  let age = Math.floor(diff/31557600000);
+  return age
+}
 //#endregion
