@@ -38,16 +38,19 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  potentialMatches = displayPeople(person)
+  displayPeople(person)
+
+  let displayOption = ''
 
   for(const el of person ){
-    let displayOption = promptFor("Found " + el.firstName + " " + el.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
-    return displayOption
+    displayOption = promptFor("Found " + el.firstName + " " + el.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
   }
 
   switch(displayOption){
     case "info":
     // TODO: get person's info
+      for(const el of person){
+        displayPerson(el)}
     break;
     case "family":
     // TODO: get person's family
