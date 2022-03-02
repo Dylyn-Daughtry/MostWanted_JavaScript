@@ -41,6 +41,7 @@ function mainMenu(person, people){
   displayPeople(person)
 
   let displayOption = ''
+  let userSatisfaction = false
 
   for(const el of person ){
     displayOption = promptFor("Found " + el.firstName + " " + el.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
@@ -68,102 +69,39 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 
+  while(userSatisfaction == false){
 
-if(displayOption === "info"){
-  displayOption = promptFor("Do you want to know their 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
+    displayOption = promptFor("Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
 
-  switch(displayOption){
-    case "family":
-    // TODO: get person's family
-      for(const el of person){
-        displayPerson(el)};
-    break;
-    case "descendants":
-    // TODO: get person's descendants
-    break;
-    case "restart":
-    app(people); // restart
-    break;
-    case "quit":
-    return; // stop execution
-    default:
-    return mainMenu(person, people); // ask again
-  }
-
-  }
-
-  else if(displayOption === "family"){
-    displayOption = promptFor("Do you want to know their 'info', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
-  
     switch(displayOption){
       case "info":
       // TODO: get person's info
-      for(const el of person){
-        displayPerson(el)};
+        for(const el of person){
+          displayPerson(el)};
+      break;
+  
+      case "family":
+      // TODO: get person's family
       break;
 
       case "descendants":
       // TODO: get person's descendants
       break;
+
       case "restart":
+      displayOption = true
       app(people); // restart
       break;
+
       case "quit":
+      displayOption = true
       return; // stop execution
       default:
       return mainMenu(person, people); // ask again
     }
-  
-    }
 
-  else if(displayOption === "decendants"){
-    displayOption = promptFor("Do you want to know their 'info', or 'family'? Type the option you want or 'restart' or 'quit'", autoValid)
-  
-    switch(displayOption){
-      case "info":
-        // TODO: get person's info
-        for(const el of person){
-          displayPerson(el)};
-        break;
-      case "family":
-      // TODO: get person's family
-        for(const el of person){
-          displayPerson(el)};
-      break;
-
-      case "restart":
-      app(people); // restart
-      break;
-      case "quit":
-      return; // stop execution
-      default:
-      return mainMenu(person, people); // ask again
-    }
-  
   }
 
-    else if(displayOption === "restart"){
-      displayOption = promptFor("Do you want to know their 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
-    
-      switch(displayOption){
-        case "restart":
-          app(people); // restart app
-          break;
-      }
-    
-    }
-
-    else if(displayOption === "quit"){
-      displayOption = promptFor("Do you want to know their 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
-    
-      switch(displayOption){
-        case "quit":
-        return; // stop execution
-        default:
-        return mainMenu(person, people); // ask again
-      }
-    
-    }
 }
 
 //#endregion
