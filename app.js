@@ -38,8 +38,8 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
-  let potentialMatches = displayPeople(person)
-  alert(potentialMatches)
+
+  potentialMatches = displayPeople(person)
 
   for(const el of person ){
     let displayOption = promptFor("Found " + el.firstName + " " + el.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
@@ -93,7 +93,7 @@ function searchByName(people){
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
   let eyeColor = promptFor("What is the person's eye color?", autoValid)
-  let foundPeople = people.filter(function(potentialMatch){
+  let foundPerson = people.filter(function(potentialMatch){
       if(potentialMatch.eyeColor === eyeColor){
       return true;
     }
@@ -101,9 +101,9 @@ function searchByEyeColor(people){
       return false;
     }
   })
-  for(const person of foundPeople){
-    listOfNames.push(person.firstName)}
-  return foundPeople
+  for(const person of foundPerson){
+    listOfNames.push(person.firstName + " " + person.lastName)}
+  return foundPerson
 }
 
 function searchByGender(people){
@@ -146,7 +146,7 @@ function searchByOccupation(people){
 
 // alerts a list of people
 function displayPeople(people){
-  alert("Potential Matches: " + ("\n") + people.map(function(person){
+  alert("Potential matches: " + ("\n") + people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
