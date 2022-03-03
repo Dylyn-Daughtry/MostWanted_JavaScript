@@ -205,26 +205,53 @@ function findDescendants(subject, people){
 
 //TODO: add other trait filter functions here.
 function immediateFamily(subject, people){
+  let spouseList = [];
+  let parentList = [];
+  let childrenList = [];
+  //siblings
+  let siblingList = findSiblings(subject,people);
   let foundFamily = people.filter(function(person){
     //spouse
     if(person.currentSpouse === subject.id){
+      spouseList.push(person)
       return true;
     }
     //parents
     else if(subject.parents.includes(person.id)){
+      parentList.push(person)
       return true;
     }
     //children
     else if(person.parents.includes(subject.id)){
+      childrenList.push(person)
       return true;
     }
     else{
       return false;
     }
   });
-  //siblings
-  foundFamily = foundFamily.concat(findSiblings(subject, people));
-  return foundFamily;
+  alert("Siblings: " + ("\n") +  
+          siblingList.map(function(person){
+            return person.firstName + " " + person.lastName;
+          }).join("\n") + "\n" +
+          "\n" +
+        "Parents: " + ("\n") +  
+          parentList.map(function(person){
+            return person.firstName + " " + person.lastName;
+          }).join("\n") + "\n" +
+          "\n" +
+        "Children: " + ("\n") +  
+          childrenList.map(function(person){
+            return person.firstName + " " + person.lastName;
+          }).join("\n") + "\n" +
+          "\n" +
+        "Spouse: " + ("\n") +  
+          spouseList.map(function(person){
+            return person.firstName + " " + person.lastName;
+          }).join("\n")
+  );
+  // foundFamily = foundFamily.concat(findSiblings(subject, people));
+  // return foundFamily;
 }
 
 function findSiblings(subject, people){
