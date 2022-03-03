@@ -74,7 +74,7 @@ function mainMenu(person, people){
 
         case "family":
         // TODO: get person's family
-          displayPeople(immediateFamily(person, people))
+          displayPeople(immediateFamily(person[0], people))
         break;
         case "descendants":
         // TODO: get person's descendants
