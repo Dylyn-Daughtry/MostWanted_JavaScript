@@ -35,7 +35,7 @@ function mainMenu(person, people){
 
   let inData;
 
-  inData = people.includes(person.person);
+  inData = people.includes(person[0]);
 
   if(inData == false){
       alert("Could not find that individual.");
@@ -78,6 +78,8 @@ function mainMenu(person, people){
         break;
         case "descendants":
         // TODO: get person's descendants
+        for(const el of person){
+          displayDescendants(el, people)}
         break;
         case "restart":
         app(people); // restart
@@ -106,6 +108,8 @@ function mainMenu(person, people){
 
           case "descendants":
           // TODO: get person's descendants
+              for(const el of person){
+                displayDescendants(el, people)}
           break;
 
           case "restart":
@@ -189,6 +193,18 @@ function searchByOccupation(people){
   return foundPerson
 }
 
+function displayDescendants(person, people){
+  for(const subject of people){
+    if(subject.parents.includes(person.id)){
+      alert("Descendants: " + ("\n") + people.map(function(person){
+        return person.firstName + " " + person.lastName;
+      }).join("\n"))
+    }
+    else{
+
+    }
+  }
+}
 
 //TODO: add other trait filter functions here.
 function immediateFamily(subject, people){
@@ -214,7 +230,7 @@ function immediateFamily(subject, people){
   return foundFamily;
 }
 
-function findSiblings(subject,people){
+function findSiblings(subject, people){
   if(subject.parents.length === 0){
     return [];
   }
