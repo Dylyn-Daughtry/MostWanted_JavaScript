@@ -9,19 +9,39 @@
 // app is the function called to start the entire application
 
 function app(people){
-  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  let searchType = promptFor("Do you know the full name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let searchResults;
   switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
       break;
     case 'no':
-      searchResults = searchByEyeColor(people)
-      // TODO: search by traits
-      break;
-    default:
-      app(people); // restart app
-      break;
+      searchType = promptFor("Do you know the first name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase(); 
+      switch(searchType){
+        case 'yes':
+          searchResults = searchByFirstName(people);
+          break;
+        case 'no':
+          searchType = promptFor("Do you know the last name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase(); 
+          switch(searchType){
+            case 'yes':
+              searchResults = searchByLastName(people);
+              break;
+            case 'no':
+              searchType = promptFor("Do you know the 'eye color', 'gender', or 'occupation' of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase(); 
+              switch(searchType){
+                case 'yes':
+                  searchResults = narrowDownSearch(people);
+                  break;
+                case 'no':
+                  searchType = promptFor("Do you know the first name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase(); 
+                  break;
+                default:
+                  app(people); // restart app
+                  break;
+              }
+          }
+      }
   }
   
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
@@ -74,7 +94,7 @@ function mainMenu(person, people){
 
         case "family":
         // TODO: get person's family
-          displayPeople(immediateFamily(person[0], people))
+          immediateFamily(person[0], people)
         break;
         case "descendants":
         // TODO: get person's descendants
@@ -96,13 +116,13 @@ function mainMenu(person, people){
         switch(displayOption){
           case "info":
           // TODO: get person's info
-            for(const el of person){
-              displayPerson(el)};
+            for(const details of person){
+              displayPerson(details)};
           break;
       
           case "family":
           // TODO: get person's family
-            displayPeople(immediateFamily(person[0], people))
+            immediateFamily(person[0], people)
           break;
 
           case "descendants":
@@ -135,6 +155,35 @@ function mainMenu(person, people){
 //#region 
 
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
+
+function searchByFirstName(people){
+  let firstName = promptFor("What is the person's first name?", autoValid);
+  let foundPerson = people.filter(function(potentialMatch){
+    if(potentialMatch.firstName.toLowerCase() === firstName){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person single person object using the name they entered.
+  return foundPerson;
+}
+
+function searchByLastName(people){
+  let lastName = promptFor("What is the person's last name?", autoValid);
+  let foundPerson = people.filter(function(potentialMatch){
+    if(potentialMatch.lastName.toLowerCase() === lastName){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person single person object using the name they entered.
+  return foundPerson;
+}
+
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", autoValid);
   let lastName = promptFor("What is the person's last name?", autoValid);
@@ -233,18 +282,18 @@ function immediateFamily(subject, people){
   alert("Siblings: " + ("\n") +  
           siblingList.map(function(person){
             return person.firstName + " " + person.lastName;
-          }).join("\n") + "\n" +
-          "\n" +
+          }).join("\n") + ' ' + ("\n") + ("\n") +
+
         "Parents: " + ("\n") +  
           parentList.map(function(person){
             return person.firstName + " " + person.lastName;
-          }).join("\n") + "\n" +
-          "\n" +
+          }).join("\n") + ' ' + ("\n") + ("\n") +
+
         "Children: " + ("\n") +  
           childrenList.map(function(person){
             return person.firstName + " " + person.lastName;
-          }).join("\n") + "\n" +
-          "\n" +
+          }).join("\n") + ' ' + ("\n") + ("\n") +
+
         "Spouse: " + ("\n") +  
           spouseList.map(function(person){
             return person.firstName + " " + person.lastName;
@@ -278,7 +327,21 @@ function findSiblings(subject, people){
   }
 }
 
+function narrowDownSearch(people){
 
+  let query1Result;
+  let query2Result;
+  let query3Result;
+
+  query1Result = searchByEyeColor(people)
+
+  query2Result = searchByGender(query1Result)
+
+  query3Result = searchByOccupation(query2Result)
+
+  return query3Result
+
+}
 
 //#endregion
 
