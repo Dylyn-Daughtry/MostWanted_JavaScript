@@ -78,8 +78,7 @@ function mainMenu(person, people){
         break;
         case "descendants":
         // TODO: get person's descendants
-        for(const el of person){
-          displayDescendants(el, people)}
+          displayPeople(findDescendants(person[0], people))
         break;
         case "restart":
         app(people); // restart
@@ -103,13 +102,12 @@ function mainMenu(person, people){
       
           case "family":
           // TODO: get person's family
-            displayPeople(immediateFamily(person, people))
+            displayPeople(immediateFamily(person[0], people))
           break;
 
           case "descendants":
           // TODO: get person's descendants
-              for(const el of person){
-                displayDescendants(el, people)}
+            displayPeople(findDescendants(person[0], people))
           break;
 
           case "restart":
@@ -193,17 +191,16 @@ function searchByOccupation(people){
   return foundPerson
 }
 
-function displayDescendants(person, people){
-  for(const subject of people){
-    if(subject.parents.includes(person.id)){
-      alert("Descendants: " + ("\n") + people.map(function(person){
-        return person.firstName + " " + person.lastName;
-      }).join("\n"))
+function findDescendants(subject, people){
+  let foundDescendants = people.filter(function(person){
+    if (person.parents.includes(subject.id)){
+      return true
     }
     else{
-
+      return false
     }
-  }
+  })
+  return foundDescendants
 }
 
 //TODO: add other trait filter functions here.
