@@ -83,67 +83,35 @@ function mainMenu(person, people){
       let displayOption;
       let userSatisfaction = false
 
-      for(const el of person ){
-        displayOption = promptFor("Found " + el.firstName + " " + el.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
-      }
-
-      switch(displayOption){
-        case "info":
-        // TODO: get person's info
-          for(const el of person){
-            displayPerson(el)};
-        break;
-
-        case "family":
-        // TODO: get person's family
-          immediateFamily(person[0], people)
-        break;
-        case "descendants":
-        // TODO: get person's descendants
-          displayPeople(findDescendants(person[0], people))
-        break;
-        case "restart":
-        app(people); // restart
-        break;
-        case "quit":
-        return; // stop execution
-        default:
-        return mainMenu(person, people); // ask again
-      }
-
       while(userSatisfaction == false){
 
-        displayOption = promptFor("Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
+        for(const el of person ){
+          displayOption = promptFor("Found " + el.firstName + " " + el.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid)
+        }
 
         switch(displayOption){
           case "info":
           // TODO: get person's info
-            for(const details of person){
-              displayPerson(details)};
+            for(const el of person){
+              displayPerson(el)};
           break;
-      
+
           case "family":
           // TODO: get person's family
             immediateFamily(person[0], people)
           break;
-
           case "descendants":
           // TODO: get person's descendants
             displayPeople(findDescendants(person[0], people))
           break;
-
           case "restart":
-          displayOption = true
           app(people); // restart
           break;
-
           case "quit":
-          displayOption = true
           return; // stop execution
           default:
           return mainMenu(person, people); // ask again
         }
-
       }
     }
   }
@@ -359,7 +327,7 @@ function narrowDownSearch(people){
   while(answerTwo == false){
 
     searchResults = promptFor("Do you know the gender of the person you are looking for? Enter 'yes' or 'no'", autoValid);
-    
+
     if(searchResults.toLowerCase() === 'no'){
       answerTwo = true
     }
