@@ -31,10 +31,12 @@ function app(people){
               searchType = promptFor("Do you know the 'eye color', 'gender', or 'occupation' of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase(); 
               switch(searchType){
                 case 'yes':
-                  searchResults = narrowDownSearch(people);
+                  searchResults = narrowDownSearch(people)
                   break;
                 case 'no':
-                  searchType = promptFor("Do you know the first name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase(); 
+                  alert('Here is a list of everyone in the database...')
+                  displayPeople(people)
+                  app(people);
                   break;
                 default:
                   app(people); // restart app
@@ -329,18 +331,66 @@ function findSiblings(subject, people){
 
 function narrowDownSearch(people){
 
-  let query1Result;
-  let query2Result;
-  let query3Result;
+  let searchResults;
+  let answerOne = false
+  let answerTwo = false
+  let answerThree = false
 
-  query1Result = searchByEyeColor(people)
+  
 
-  query2Result = searchByGender(query1Result)
+  while(answerOne == false){
 
-  query3Result = searchByOccupation(query2Result)
+    searchResults = promptFor("Do you know the eye color of the person you are looking for? Enter 'yes' or 'no'", autoValid);
+    
+    if(searchResults.toLowerCase() === 'no'){
+      answerOne = true
+    }
+    else if(searchResults.toLowerCase() === 'yes'){
+      people = searchByEyeColor(people)
+      answerOne = true
+    }
+    else{
+      answerOne = false
+    }
+  }
 
-  return query3Result
+  
 
+  while(answerTwo == false){
+
+    searchResults = promptFor("Do you know the gender of the person you are looking for? Enter 'yes' or 'no'", autoValid);
+    
+    if(searchResults.toLowerCase() === 'no'){
+      answerTwo = true
+    }
+    else if(searchResults.toLowerCase() === 'yes'){
+      people = searchByGender(people)
+      answerTwo = true
+    }
+    else{
+      answerTwo = false
+    }
+  }
+
+  
+
+  while(answerThree == false){
+
+    searchResults = promptFor("Do you know the occupation of the person you are looking for? Enter 'yes' or 'no'", autoValid);
+
+    if(searchResults.toLowerCase() === 'no'){
+      answerThree = true
+    }
+    else if(searchResults.toLowerCase() === 'yes'){
+      people = searchByOccupation(people)
+      answerThree = true
+    }
+    else{
+      answerThree = false
+    }
+  }
+
+  return people
 }
 
 //#endregion
